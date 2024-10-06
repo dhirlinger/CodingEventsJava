@@ -6,6 +6,9 @@
 </head>
 <body>
     <h1>Events List:</h1>
+
+    <p th:unless="${events} and ${events.size()}">No Events!</p>
+
     <ul>
         <th:block th:each="event : ${events}">
             <li th:text="${event}"></li>
