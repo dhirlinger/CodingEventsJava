@@ -6,13 +6,10 @@
 </head>
 <body>
     <h1>Events List:</h1>
-    <th:block th: if="${events.size() > 0}">
-        <ol>
-            <th:block  th:each="event : ${events}">
-                <li th:text="${event}"></li>
-            </th:block>
-
-        </ol>
-    </th:block>
+    <ul>
+        <th:block th:each="event : ${events}">
+            <li th:text="${event}"></li>
+        </th:block>
+    </ul>
 </body>
 </html>

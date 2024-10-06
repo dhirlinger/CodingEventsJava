@@ -16,12 +16,8 @@ public class EventController {
 
     private static List<String> events = new ArrayList<>();
 
-    @GetMapping("index")
+    @GetMapping
     public String displayAllEvents(Model model){
-        List<String> events = new ArrayList<>();
-        events.add("First Philly Java");
-        events.add("Philly React Review");
-        events.add("STL Java Review");
         model.addAttribute("events", events);
         return "events/index";
     }
@@ -32,7 +28,8 @@ public class EventController {
         return "events/create";
     }
 
-    @PostMapping
+    //lives at /events
+    @PostMapping("create")
     public String createEvent(@RequestParam String eventName){
         events.add(eventName);
         return "redirect:/events";
