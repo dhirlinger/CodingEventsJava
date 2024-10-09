@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("events")
@@ -36,6 +32,25 @@ public class EventController {
     @PostMapping("create")
     public String processCreateEventForm(@RequestParam String eventName, @RequestParam String eventDescription){
         EventData.add(new Event(eventName, eventDescription));
+        return "redirect:/events";
+    }
+
+    @GetMapping("delete")
+    public String displayDeleteEVentForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds){
+        if(eventIds != null){
+            for(int id : eventIds) {
+                EventData.remove(id);
+            }
+        }
+
+
         return "redirect:/events";
     }
 }
