@@ -1,5 +1,6 @@
 package org.launchcode.codingevents.models;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,11 +27,15 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String location, String contactEmail) {
+    @AssertTrue(message = "Must be true at this time.")
+    private boolean mustRegister;
+
+    public Event(String name, String description, String location, String contactEmail, boolean mustRegister) {
         this.name = name;
         this.description = description;
         this.location = location;
         this.contactEmail = contactEmail;
+        this.mustRegister = mustRegister;
         this.id = nextId;
         nextId++;
     }
@@ -63,6 +68,15 @@ public class Event {
 
     public void setContactEmail(@Email String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    @AssertTrue
+    public boolean isMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(@AssertTrue boolean mustRegister) {
+        this.mustRegister = mustRegister;
     }
 
     public int getId() {
